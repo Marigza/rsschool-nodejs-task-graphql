@@ -14,8 +14,8 @@ const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
       },
     },
     async handler(req) {
-      //return await prisma.memberType.findMany()
       const source = req.body.query;
+      //const variables = req.body.variables !;
       const root = {
         profiles: await prisma.profile.findMany(),
         memberTypes: prisma.memberType.findMany(),
@@ -26,34 +26,10 @@ const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
         schema: SomeKindOfSchema,
         source: source,
         rootValue: root,
+        //variableValues: variables,
       })
-      //   .then((res) => {
-        
-      //   console.log('stupid girl from prisma', root.profiles.length )
-      //   console.log(`stupid girl res`, JSON.stringify(res))
-      //   //console.log(`stupid girl error`, JSON.stringify(res.errors))
-      //   return res;
-      // })
-      //   .catch(error => console.log(error))
-      //return {};
-      console.log('stupid girl source', source)
-      //console.log('stupid girl2', prisma.memberType.findMany())
     },
   });
 };
 
 export default plugin;
-
-
-// [
-//   {
-//     "message": "Invalid UUID.",
-//     "locations": [{ "line": 3, "column": 13 }],
-//     "path": ["memberTypes", 0, "id"]
-//   },
-//   {
-//     "message": "Invalid UUID.",
-//     "locations": [{ "line": 3, "column": 13 }],
-//     "path": ["memberTypes", 1, "id"]
-//   }
-// ]
