@@ -15,7 +15,7 @@ const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
     },
     async handler(req) {
       const source = req.body.query;
-      //const variables = req.body.variables !;
+      const variables = req.body.variables;
       const root = {
         profiles: await prisma.profile.findMany(),
         memberTypes: prisma.memberType.findMany(),
@@ -26,7 +26,7 @@ const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
         schema: SomeKindOfSchema,
         source: source,
         rootValue: root,
-        //variableValues: variables,
+        variableValues: variables,
       })
     },
   });
